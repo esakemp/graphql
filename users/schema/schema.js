@@ -26,12 +26,21 @@ const CompanyType = new GraphQLObjectType({
 
 })
 
+const RelativeType = new GraphQLObjectType({
+    name: 'Relative',
+    fields: {
+        parents: {type: GraphQLString},
+        childs: {type: GraphQLString}
+    }
+})
+
 const UserType = new GraphQLObjectType({
     name: 'User',
     fields: () => ({
         id: { type: GraphQLString },
         firstName: { type: GraphQLString },
         age: { type: GraphQLInt },
+        relatives: {type: RelativeType},
         company: {
             type: CompanyType,
             resolve(parentValue, args) {
